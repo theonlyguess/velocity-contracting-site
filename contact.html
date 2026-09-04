@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact | Velocity Contracting LLC</title>
-  <meta name="description" content="Contact Velocity Contracting LLC in Denver, Colorado. Email guess@velocitycontractingllc.com, phone 806-252-7815, office at 5201 Helena St. Weekday office hours 8-5 MT." />
+  <meta name="description" content="Contact Velocity Contracting LLC in Denver, Colorado. Call 806-252-7815, email guess@velocitycontractingllc.com, or send a quote request. Office at 5201 Helena St. Weekday hours 8 to 5 MT." />
   <meta name="theme-color" content="#0B1F3A" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; base-uri 'self'; frame-ancestors 'none'" />
   <link rel="canonical" href="https://velocitycontractingllc.com/contact.html" />
   <meta property="og:title" content="Contact | Velocity Contracting LLC" />
-  <meta property="og:description" content="Request a quote or capability conversation. Denver office, phone, and email." />
+  <meta property="og:description" content="Request a quote or capability conversation. Denver office, phone, email, and a working inquiry form." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://velocitycontractingllc.com/contact.html" />
   <meta property="og:site_name" content="Velocity Contracting LLC" />
@@ -60,7 +61,7 @@
           </ol>
         </nav>
         <h1>Contact Velocity Contracting</h1>
-        <p class="page-hero-lead">Agency buyers, facility managers, brokers, and trade partners: reach us by email or phone. We respond promptly during office hours.</p>
+        <p class="page-hero-lead">Agency buyers, facility managers, insurers, and trade partners: call or email us directly, or send a quote request. We respond promptly during office hours.</p>
       </div>
     </header>
 
@@ -82,7 +83,7 @@
             </div>
             <div class="contact-tile contact-tile-static">
               <span class="contact-label">Office hours</span>
-              <span class="contact-value">Weekdays 8:00 a.m. To 5:00 p.m. Mountain Time</span>
+              <span class="contact-value">Weekdays 8:00 a.m. to 5:00 p.m. Mountain Time</span>
             </div>
             <div class="contact-tile contact-tile-static">
               <span class="contact-label">Primary contact</span>
@@ -90,58 +91,81 @@
             </div>
           </div>
           <p style="margin-top:1.25rem;color:var(--slate-600);font-size:0.95rem">
-            For solicitations and BidNet notices, include the solicitation number in your subject line so we can route the response quickly.
+            For solicitations and BidNet notices, include the solicitation number so we can route the response quickly. Agencies can call or email without using the form.
           </p>
         </div>
 
-        <form class="contact-form" id="contact-form" action="mailto:guess@velocitycontractingllc.com" method="post" enctype="text/plain">
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/guess@velocitycontractingllc.com" method="POST">
           <h2>Request a quote</h2>
-          <p class="form-intro">This form opens your email client with a pre-filled message. No data is stored on this website.</p>
-          <div class="form-row two">
-            <div class="form-field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required />
-            </div>
-            <div class="form-field">
-              <label for="organization">Organization</label>
-              <input id="organization" name="organization" type="text" autocomplete="organization" />
-            </div>
+          <p class="form-intro">Submit this form and it is emailed to guess@velocitycontractingllc.com. Submissions are not stored on this static site. You can always call 806-252-7815 or email us directly instead.</p>
+
+          <div id="form-success" class="form-success" hidden>
+            <h2>Message received</h2>
+            <p>Thank you. Your inquiry was sent to guess@velocitycontractingllc.com. We will respond during office hours. For time-sensitive items, call 806-252-7815.</p>
           </div>
-          <div class="form-row two">
-            <div class="form-field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required />
+
+          <div id="form-fields">
+            <p id="form-error" class="form-error" hidden role="alert"></p>
+            <input type="hidden" name="_subject" value="Velocity Contracting website inquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <div class="honeypot">
+              <label for="gotcha">Leave this field empty</label>
+              <input id="gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
             </div>
-            <div class="form-field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            <div class="form-row two">
+              <div class="form-field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="organization">Organization</label>
+                <input id="organization" name="organization" type="text" autocomplete="organization" />
+              </div>
             </div>
+            <div class="form-row two">
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="interest">Interest</label>
+                <select id="interest" name="interest">
+                  <option value="General inquiry">General inquiry</option>
+                  <option value="Janitorial / custodial">Janitorial / custodial</option>
+                  <option value="Landscaping / grounds / vegetation">Landscaping / grounds / vegetation</option>
+                  <option value="Pest control">Pest control</option>
+                  <option value="Snow and ice">Snow and ice</option>
+                  <option value="Window and glass">Window and glass</option>
+                  <option value="Waste, trash, compost, portable restrooms">Waste, trash, compost, portable restrooms</option>
+                  <option value="Building and facility maintenance">Building and facility maintenance</option>
+                  <option value="HVAC, generators, mechanical">HVAC, generators, mechanical</option>
+                  <option value="Fire and life safety">Fire and life safety</option>
+                  <option value="Electrical, low voltage, fiber, EV chargers">Electrical, low voltage, fiber, EV chargers</option>
+                  <option value="Holiday lighting and site amenities">Holiday lighting and site amenities</option>
+                  <option value="Parking lots, sidewalks, pavement">Parking lots, sidewalks, pavement</option>
+                  <option value="Specialty building trades">Specialty building trades</option>
+                  <option value="On-call / mobile field response">On-call / mobile field response</option>
+                  <option value="Public-sector solicitation">Public-sector solicitation</option>
+                  <option value="Insurance / COI request">Insurance / COI request</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Sites, scope, timeline, or solicitation number"></textarea>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="form-hint">Prefer not to use the form? Email <a href="mailto:guess@velocitycontractingllc.com">guess@velocitycontractingllc.com</a> or call <a href="tel:+18062527815">806-252-7815</a>.</p>
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="interest">Interest</label>
-              <select id="interest" name="interest">
-                <option value="General inquiry">General inquiry</option>
-                <option value="Janitorial / custodial">Janitorial / custodial</option>
-                <option value="Landscaping / grounds">Landscaping / grounds</option>
-                <option value="Pest control">Pest control</option>
-                <option value="Snow and ice">Snow and ice</option>
-                <option value="Window cleaning">Window cleaning</option>
-                <option value="Light facility maintenance">Light facility maintenance</option>
-                <option value="On-call / mobile field response">On-call / mobile field response</option>
-                <option value="Public-sector solicitation">Public-sector solicitation</option>
-                <option value="Insurance / COI request">Insurance / COI request</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required placeholder="Sites, scope, timeline, or solicitation number"></textarea>
-            </div>
-          </div>
-          <button class="btn btn-primary" type="submit">Open email to send</button>
-          <p class="form-hint">Or email us directly at <a href="mailto:guess@velocitycontractingllc.com">guess@velocitycontractingllc.com</a>.</p>
         </form>
       </div>
     </section>
@@ -170,7 +194,9 @@
           <ul>
             <li><a href="./services.html#janitorial">Janitorial</a></li>
             <li><a href="./services.html#landscaping">Landscaping</a></li>
-            <li><a href="./services.html#snow">Snow &amp; ice</a></li>
+            <li><a href="./services.html#maintenance">Building maintenance</a></li>
+            <li><a href="./services.html#hvac">HVAC &amp; mechanical</a></li>
+            <li><a href="./services.html#waste">Waste &amp; sanitation</a></li>
             <li><a href="./services.html#mobile">Mobile response</a></li>
           </ul>
         </div>
@@ -179,8 +205,9 @@
           <ul>
             <li>561720 Janitorial</li>
             <li>561730 Landscaping</li>
-            <li>561710 Pest</li>
-            <li>561790 / 238990</li>
+            <li>238220 HVAC / mechanical</li>
+            <li>238210 Electrical</li>
+            <li>561790 / 238990 / 562111</li>
           </ul>
         </div>
       </div>
