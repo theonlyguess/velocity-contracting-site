@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://velocitycontractingllc.com/sitemap.xml

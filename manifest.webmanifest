@@ -1,0 +1,19 @@
+{
+  "name": "Velocity Contracting LLC",
+  "short_name": "Velocity",
+  "description": "Colorado facilities contracting: janitorial, grounds, pest, snow, windows, light maintenance, and mobile field response.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B1F3A",
+  "theme_color": "#0B1F3A",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
