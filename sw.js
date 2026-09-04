@@ -1,8 +1,13 @@
 /* Minimal service worker: offline shell for install / home-screen use */
-var CACHE = "velocity-v1";
+var CACHE = "velocity-v2";
 var ASSETS = [
   "./",
   "./index.html",
+  "./services.html",
+  "./about.html",
+  "./contracting.html",
+  "./contact.html",
+  "./privacy.html",
   "./styles.css",
   "./main.js",
   "./favicon.svg",

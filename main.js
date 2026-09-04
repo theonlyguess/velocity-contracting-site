@@ -44,29 +44,99 @@
     }
   });
 
-  /* Optional mailto contact form */
+  /* Contact form: Formsubmit AJAX. Never claim success unless the API says so. */
   var form = document.getElementById("contact-form");
   if (form) {
+    var successBox = document.getElementById("form-success");
+    var errorBox = document.getElementById("form-error");
+    var fieldsWrap = document.getElementById("form-fields");
+    var submitBtn = form.querySelector('[type="submit"]');
+    var defaultLabel = submitBtn ? submitBtn.textContent : "Send message";
+
+    function showError(msg) {
+      if (errorBox) {
+        errorBox.hidden = false;
+        errorBox.textContent = msg;
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultLabel;
+      }
+    }
+
+    function isFormsubmitSuccess(data) {
+      if (!data || typeof data !== "object") return false;
+      return data.success === true || data.success === "true";
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = (form.querySelector('[name="name"]') || {}).value || "";
-      var org = (form.querySelector('[name="organization"]') || {}).value || "";
-      var email = (form.querySelector('[name="email"]') || {}).value || "";
-      var phone = (form.querySelector('[name="phone"]') || {}).value || "";
-      var interest = (form.querySelector('[name="interest"]') || {}).value || "";
-      var message = (form.querySelector('[name="message"]') || {}).value || "";
 
-      var subject = encodeURIComponent("Website inquiry: Velocity Contracting LLC");
-      var body = encodeURIComponent(
-        "Name: " + name + "\n" +
-        "Organization: " + org + "\n" +
-        "Email: " + email + "\n" +
-        "Phone: " + phone + "\n" +
-        "Interest: " + interest + "\n\n" +
-        message
-      );
-      window.location.href =
-        "mailto:guess@velocitycontractingllc.com?subject=" + subject + "&body=" + body;
+      if (errorBox) {
+        errorBox.hidden = true;
+        errorBox.textContent = "";
+      }
+
+      var honeypot = form.querySelector('[name="_gotcha"]');
+      if (honeypot && String(honeypot.value || "").trim() !== "") {
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending";
+      }
+
+      var payload = {
+        name: (form.querySelector('[name="name"]') || {}).value || "",
+        organization: (form.querySelector('[name="organization"]') || {}).value || "",
+        email: (form.querySelector('[name="email"]') || {}).value || "",
+        phone: (form.querySelector('[name="phone"]') || {}).value || "",
+        interest: (form.querySelector('[name="interest"]') || {}).value || "",
+        message: (form.querySelector('[name="message"]') || {}).value || "",
+        _subject: "Velocity Contracting website inquiry",
+        _template: "table",
+        _captcha: "false"
+      };
+
+      fetch("https://formsubmit.co/ajax/guess@velocitycontractingllc.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          return res.json().then(
+            function (data) {
+              return data;
+            },
+            function () {
+              return null;
+            }
+          );
+        })
+        .then(function (data) {
+          if (isFormsubmitSuccess(data)) {
+            if (successBox) successBox.hidden = false;
+            if (fieldsWrap) fieldsWrap.hidden = true;
+            form.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = defaultLabel;
+            }
+          } else {
+            showError(
+              "The message could not be sent. Please email guess@velocitycontractingllc.com or call 806-252-7815."
+            );
+          }
+        })
+        .catch(function () {
+          showError(
+            "The message could not be sent. Please email guess@velocitycontractingllc.com or call 806-252-7815."
+          );
+        });
     });
   }
 
