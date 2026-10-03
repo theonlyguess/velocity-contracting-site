@@ -71,7 +71,7 @@ ol.terms li{margin:4px 0;max-width:72ch}
 <table><thead><tr><th>REPORT ITEM</th><th>REPAIR</th><th class="r">PRICE</th></tr></thead><tbody id="rows"></tbody></table>
 <div class="tot">
  <div><span>Inspection items</span><b id="tpriced"></b></div>
- <div><span>Licensed electrician and plumber</span><b id="tlic"></b></div>
+ <div id="tlicrow"><span>Licensed electrician and plumber</span><b id="tlic"></b></div>
  <div><span>Permits</span><b id="tperm"></b></div>
  <div id="telrow"><span>Elective items</span><b id="tel"></b></div>
  <div id="tpendrow"><span>Items to follow</span><b id="tpend"></b></div>
@@ -82,8 +82,8 @@ ol.terms li{margin:4px 0;max-width:72ch}
  <li>Each price covers labor and materials to complete the repair described for that report item. Each item number links to its section of the inspection report.</li>
  <li>Included are the report items priced above, including the west deck stairs. Roof, siding, grading and landscaping maintained by the HOA are not included.</li>
  <li>Provided this quote is accepted by October 7, 2026 and permits are issued in the normal course, work will be completed before the October 21, 2026 closing.</li>
- <li>Lines marked EST are carried at a trade's preliminary price and are confirmed in writing before that work begins.</li>
- <li>Permit lines are the City and County of Denver's published trade permit fees, carried at cost. The licensed trade lines cover a licensed electrician and a licensed plumber performing or signing off on that trade's work, and are included in the total.</li>
+<li>Lines marked EST are carried at a trade's preliminary price and are confirmed in writing before that work begins.</li>
+<li>Permit lines are the City and County of Denver's published trade permit fees, carried at cost. The licensed trade lines cover a licensed electrician and a licensed plumber performing or signing off on that trade's work, and are included in the total.</li>
 <li>Elective items are requested beyond the inspection report and are priced on the same terms as the report items; any of them may be removed before acceptance with its price deducted.</li>
  <li id="tfnote">Items marked To follow are heating and cooling items awaiting that trade's pricing. They are excluded from the total until this quote is reissued with their prices.</li>
  <li>Conditions concealed behind walls, floors or finishes are not included; any change to the work or price is agreed in writing before that work proceeds.</li>
@@ -113,9 +113,9 @@ G.forEach(g => {
 });
 document.getElementById("rows").innerHTML = html;
 const RI = R.filter(r => !r.kind), RE = R.filter(r => r.kind === "elective");
-document.getElementById("cnt").textContent = RI.length + " inspection items (" + RI.filter(r=>r.incl).length + " duplicate), " + priced + " priced" + (pend ? ", " + pend + " to follow" : "") + (RE.length ? "; " + RE.length + " elective items" : "");
+document.getElementById("cnt").textContent = RI.length + " inspection items" + (pend ? ", " + pend + " to follow" : "") + (RE.length ? "; " + RE.length + " elective items" : "");
 document.getElementById("tpriced").textContent = priced + " items · " + $(sumI);
-document.getElementById("tlic").textContent = $(sumL);
+if(sumL) document.getElementById("tlic").textContent = $(sumL); else document.getElementById("tlicrow").remove();
 document.getElementById("tperm").textContent = $(sumP);
 if(RE.length) document.getElementById("tel").textContent = RE.length + " items · " + $(sumE); else document.getElementById("telrow").remove();
 if(pend) document.getElementById("tpend").textContent = pend + " · To follow"; else { document.getElementById("tpendrow").remove(); document.getElementById("tfnote").remove(); }
