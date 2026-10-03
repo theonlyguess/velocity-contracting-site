@@ -1,0 +1,843 @@
+{
+ "quotes": [
+  "Carlos, Electrical",
+  "Javier and Emi",
+  "Ventilation Pro, HVAC"
+ ],
+ "floor_rooms": false,
+ "hvac_in": true,
+ "items": {
+  "4.5.1": {
+   "ref": "4.5.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 50,
+    "total": 150,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "4.5.2": {
+   "ref": "4.5.2",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 50,
+    "material": 50,
+    "total": 100,
+    "note": "Reparar",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "4.5.3": {
+   "ref": "4.5.3",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 100,
+    "total": 200,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "4.7.1": {
+   "ref": "4.7.1",
+   "craft": "finish",
+   "trades": [
+    "finish",
+    "hoa"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 300,
+    "material": 100,
+    "total": 400,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "4.9.1": {
+   "ref": "4.9.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 200,
+    "material": 200,
+    "total": 400,
+    "note": "Costo de permiso de plomeria y costo del plomero con licencia es de 1200 dolares mas",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "5.5.1": {
+   "ref": "5.5.1",
+   "craft": "elec",
+   "trades": [
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 25,
+    "material": 5,
+    "total": 30,
+    "note": "Outlet and cover plate (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "5.5.2": {
+   "ref": "5.5.2",
+   "craft": "elec",
+   "trades": [
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 50,
+    "material": 19,
+    "total": 69,
+    "note": "Two 10 packs of outlet cover plates (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "5.6.1": {
+   "ref": "5.6.1",
+   "craft": "elec",
+   "trades": [
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 150,
+    "material": 120,
+    "total": 270,
+    "note": "4 pack of GFCI outlets (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.2.1": {
+   "ref": "7.2.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 150,
+    "material": 50,
+    "total": 200,
+    "note": "Incluida tambi\u00e9n en el costo del plomero y permiso",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.4.1": {
+   "ref": "7.4.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 50,
+    "total": 150,
+    "note": "Ai qu desconectar tuber\u00eda de PVC",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.5.1": {
+   "ref": "7.5.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 50,
+    "total": 150,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.5.2": {
+   "ref": "7.5.2",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 100,
+    "total": 200,
+    "note": "Ai que remplazar",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.5.3": {
+   "ref": "7.5.3",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 250,
+    "material": 150,
+    "total": 400,
+    "note": "Remplazar llave mizteadora de la ducha",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.7.1": {
+   "ref": "7.7.1",
+   "craft": "hvac",
+   "trades": [
+    "hvac"
+   ],
+   "pick": {
+    "sub": "Ventilation Pro, HVAC",
+    "labor": 300,
+    "material": 300,
+    "total": 600,
+    "note": "No permit required",
+    "submitted": "2026-10-03T14:22:42.634Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "7.8.1": {
+   "ref": "7.8.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb",
+    "hvac"
+   ],
+   "pick": {
+    "sub": "Ventilation Pro, HVAC",
+    "labor": 150,
+    "material": 150,
+    "total": 300,
+    "note": "No permit required",
+    "submitted": "2026-10-03T14:22:42.634Z"
+   },
+   "alts": [
+    {
+     "sub": "Javier and Emi",
+     "labor": 250,
+     "material": 150,
+     "total": 400,
+     "note": "",
+     "submitted": "2026-10-03T20:16:44.000Z"
+    }
+   ],
+   "flags": [
+    "quoted by 2 subs; cheapest kept"
+   ],
+   "status": "priced"
+  },
+  "8.1.1": {
+   "ref": "8.1.1",
+   "craft": "hvac",
+   "trades": [
+    "hvac"
+   ],
+   "pick": {
+    "sub": "Ventilation Pro, HVAC",
+    "labor": 250,
+    "material": 0,
+    "total": 250,
+    "note": "No permit required",
+    "submitted": "2026-10-03T14:22:42.634Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "8.6.1": {
+   "ref": "8.6.1",
+   "craft": "hvac",
+   "trades": [
+    "hvac"
+   ],
+   "pick": null,
+   "alts": [],
+   "flags": [
+    "same repair as 7.7.1, priced once there"
+   ],
+   "status": "included",
+   "incl": "7.7.1"
+  },
+  "8.7.1": {
+   "ref": "8.7.1",
+   "craft": "elec",
+   "trades": [
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 125,
+    "material": 45,
+    "total": 170,
+    "note": "Disconnect, box, wiring and fittings in the basement (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "8.8.1": {
+   "ref": "8.8.1",
+   "craft": "hvac",
+   "trades": [
+    "hvac"
+   ],
+   "pick": {
+    "sub": "Ventilation Pro, HVAC",
+    "labor": 20,
+    "material": 6,
+    "total": 26,
+    "note": "",
+    "submitted": "2026-10-03T14:22:42.634Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "8.9.1": {
+   "ref": "8.9.1",
+   "craft": "chimney",
+   "trades": [
+    "chimney"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 600,
+    "material": 200,
+    "total": 800,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "10.8.1": {
+   "ref": "10.8.1",
+   "craft": "plumb",
+   "trades": [
+    "plumb"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 75,
+    "material": 75,
+    "total": 150,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.2.1": {
+   "ref": "11.2.1",
+   "craft": "finish",
+   "trades": [
+    "finish",
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 115,
+    "material": 265,
+    "total": 380,
+    "note": "14/3 wire 100 ft, 5 boxes and the smoke/CO alarms, upstairs and bedrooms; covers 11.3.1 too (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [
+    {
+     "sub": "Javier and Emi",
+     "labor": 100,
+     "material": 100,
+     "total": 200,
+     "note": "",
+     "submitted": "2026-10-03T20:16:44.000Z"
+    }
+   ],
+   "flags": [
+    "hardwired per Carlos (G 10/3)"
+   ],
+   "status": "priced"
+  },
+  "11.3.1": {
+   "ref": "11.3.1",
+   "craft": "finish",
+   "trades": [
+    "finish",
+    "elec"
+   ],
+   "pick": {
+    "sub": "Carlos (electrical)",
+    "labor": 110,
+    "material": 0,
+    "total": 110,
+    "note": "Included in 11.2.1 (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   "alts": [
+    {
+     "sub": "Javier and Emi",
+     "labor": 100,
+     "material": 100,
+     "total": 200,
+     "note": "",
+     "submitted": "2026-10-03T20:16:44.000Z"
+    }
+   ],
+   "flags": [
+    "hardwired per Carlos (G 10/3)"
+   ],
+   "status": "priced"
+  },
+  "11.4.1": {
+   "ref": "11.4.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 50,
+    "material": 50,
+    "total": 100,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.5.1": {
+   "ref": "11.5.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 50,
+    "material": 50,
+    "total": 100,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.5.3": {
+   "ref": "11.5.3",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 100,
+    "total": 200,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.6.1": {
+   "ref": "11.6.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 1800,
+    "material": 2000,
+    "total": 3800,
+    "note": "Full LVP replacement on the hard floors, carried at Javier's LVP option price until he prices each room",
+    "submitted": "2026-10-03T20:16:44.000Z",
+    "basis": "placeholder"
+   },
+   "alts": [
+    {
+     "sub": "Javier and Emi",
+     "labor": 200,
+     "material": 100,
+     "total": 300,
+     "note": "Remplazar",
+     "submitted": "2026-10-03T20:16:44.000Z",
+     "label": "Javier and Emi, spot repair or cleaning"
+    }
+   ],
+   "flags": [
+    "placeholder: room-by-room price requested from Javier"
+   ],
+   "status": "priced"
+  },
+  "11.6.2": {
+   "ref": "11.6.2",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 800,
+    "material": 1200,
+    "total": 2000,
+    "note": "Full carpet replacement, carried at Javier's carpet option price (500 sf plus 14 stairs) until he prices each room",
+    "submitted": "2026-10-03T20:16:44.000Z",
+    "basis": "placeholder"
+   },
+   "alts": [
+    {
+     "sub": "Javier and Emi",
+     "labor": 300,
+     "material": 100,
+     "total": 400,
+     "note": "",
+     "submitted": "2026-10-03T20:16:44.000Z",
+     "label": "Javier and Emi, spot repair or cleaning"
+    }
+   ],
+   "flags": [
+    "placeholder: room-by-room price requested from Javier"
+   ],
+   "status": "priced"
+  },
+  "11.7.1": {
+   "ref": "11.7.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 200,
+    "material": 100,
+    "total": 300,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.7.2": {
+   "ref": "11.7.2",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 200,
+    "material": 100,
+    "total": 300,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.7.3": {
+   "ref": "11.7.3",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 50,
+    "material": 50,
+    "total": 100,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.9.1": {
+   "ref": "11.9.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 50,
+    "total": 150,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.9.2": {
+   "ref": "11.9.2",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 200,
+    "material": 100,
+    "total": 300,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  },
+  "11.10.1": {
+   "ref": "11.10.1",
+   "craft": "finish",
+   "trades": [
+    "finish"
+   ],
+   "pick": {
+    "sub": "Javier and Emi",
+    "labor": 100,
+    "material": 50,
+    "total": 150,
+    "note": "",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   },
+   "alts": [],
+   "flags": [],
+   "status": "priced"
+  }
+ },
+ "options": {
+  "Second laundry room on the main or upper level": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 150,
+    "material": 350,
+    "total": 500,
+    "note": "New 30 amp dryer circuit, 10/3 wire 50 ft with box ($225) and new 20 amp washer circuit, 12/2 50 ft with box ($125) (from your note)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   },
+   {
+    "sub": "Javier and Emi",
+    "labor": 300,
+    "material": 200,
+    "total": 500,
+    "note": "Ai que abrir la pared",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   }
+  ],
+  "Light box for entry and living room with new or existing switch": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 150,
+    "material": 125,
+    "total": 275,
+    "note": "14/2 100 ft wire, light boxes",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Light box for east bedroom with new or existing switch": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 150,
+    "material": 125,
+    "total": 275,
+    "note": "14/2 wire and light box",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Light box for east bedroom with new or existing switch (listed twice in your note; west bedroom?)": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 150,
+    "material": 125,
+    "total": 275,
+    "note": "14/2 wire and light box",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Relocate old vanity and bathroom switches, both bedrooms": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 100,
+    "material": 100,
+    "total": 200,
+    "note": "14/2 and two 2-gang boxes",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Labor for all the extra electrical (options above and the laundry circuits)": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 700,
+    "material": 0,
+    "total": 700,
+    "note": "Your note: materials $825, labor $700, total $1,525",
+    "submitted": "2026-10-03T03:42:42.874Z"
+   }
+  ],
+  "Licensed electrician to sign off on your work: what you would pay them": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 500,
+    "material": 300,
+    "total": 800,
+    "note": "My master electrician 500 to him and 300 for the permits",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Electrical permit": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 300,
+    "material": 0,
+    "total": 300,
+    "note": "My master electrician",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Second laundry circuits permitted: sign-off and permit cost": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 500,
+    "material": 300,
+    "total": 800,
+    "note": "Only if we permit the two new laundry circuits (from our call)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Upsize the panel before inspection, with GFI breakers on the two new laundry circuits": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 750,
+    "material": 1400,
+    "total": 2150,
+    "note": "Panel swap plus 2 GFI breakers at about $120 each for the washer and dryer (from our call); add the panel price",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "Keep the existing panel: GFI breakers on every circuit in the house": [
+   {
+    "sub": "Carlos (electrical)",
+    "labor": 450,
+    "material": 1850,
+    "total": 2300,
+    "note": "About 20 circuits at about $120 per GFI breaker (from our call)",
+    "submitted": "2026-10-03T21:20:33.000Z"
+   }
+  ],
+  "New carpet upstairs (current carpet smells of pets)": [
+   {
+    "sub": "Javier and Emi",
+    "labor": 800,
+    "material": 1200,
+    "total": 2000,
+    "note": "500 pies cuadrados y 14 escalones incluye la demolici\u00f3n y basura",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   }
+  ],
+  "New wood or LVP floors where requested": [
+   {
+    "sub": "Javier and Emi",
+    "labor": 1800,
+    "material": 2000,
+    "total": 3800,
+    "note": "Incluye demolicion , basura y remplazo de baseboard si es lvp o laminado si es madera dura el precio aumenta",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   }
+  ],
+  "Interior paint": [
+   {
+    "sub": "Javier and Emi",
+    "labor": 4000,
+    "material": 1200,
+    "total": 5200,
+    "note": "Incluye reparaci\u00f3n de trim de puertas , pintura de puertas, trim, paredes baseboard, y cielos",
+    "submitted": "2026-10-03T20:16:44.000Z"
+   }
+  ],
+  "Dryer vent has screwed/ Must be checked totally and if necessary replace": [
+   {
+    "sub": "Ventilation Pro, HVAC",
+    "labor": 350,
+    "material": 100,
+    "total": 450,
+    "note": "",
+    "submitted": "2026-10-03T14:22:42.634Z"
+   }
+  ]
+ },
+ "gaps": []
+}

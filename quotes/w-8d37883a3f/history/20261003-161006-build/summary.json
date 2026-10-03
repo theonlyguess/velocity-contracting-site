@@ -1,0 +1,44 @@
+{
+ "A": {
+  "total": 17723,
+  "sub": 14740,
+  "parts": {
+   "item": 15606,
+   "license": 0,
+   "permit": 2117,
+   "elective": 0
+  },
+  "pend": 0,
+  "name": "Full flooring replacement",
+  "desc": "Inspection repairs with full carpet and LVP replacement",
+  "qno": "VC-169-001A"
+ },
+ "B": {
+  "total": 11603,
+  "sub": 9640,
+  "parts": {
+   "item": 9486,
+   "license": 0,
+   "permit": 2117,
+   "elective": 0
+  },
+  "pend": 0,
+  "name": "Flooring repair",
+  "desc": "Inspection repairs with carpet cleaning and damaged LVP section replacement",
+  "qno": "VC-169-001B"
+ },
+ "C": {
+  "total": 26933,
+  "sub": 22415,
+  "parts": {
+   "item": 15606,
+   "license": 2082,
+   "permit": 35,
+   "elective": 9210
+  },
+  "pend": 0,
+  "name": "Full flooring replacement plus elective items",
+  "desc": "Option A plus the elective items requested beyond the inspection",
+  "qno": "VC-169-001C"
+ }
+}
