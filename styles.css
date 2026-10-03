@@ -464,6 +464,14 @@ ul, ol { margin: 0; padding: 0; }
   gap: 1rem;
 }
 
+#services-overview > .container > h3 {
+  margin-top: 2.25rem;
+}
+
+#services-overview > .container > h3:first-of-type {
+  margin-top: 0.25rem;
+}
+
 .service-card {
   background: var(--slate-50);
   border: 1px solid var(--slate-200);
