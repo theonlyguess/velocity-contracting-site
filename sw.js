@@ -1,5 +1,5 @@
 /* Minimal service worker: offline shell for install / home-screen use */
-var CACHE = "velocity-v4";
+var CACHE = "velocity-v5";
 var ASSETS = [
   "./",
   "./index.html",
@@ -11,7 +11,8 @@ var ASSETS = [
   "./styles.css",
   "./main.js",
   "./favicon.svg",
-  "./manifest.webmanifest"
+  "./manifest.webmanifest",
+  "./images/velocity-logo.png"
 ];
 
 self.addEventListener("install", function (event) {

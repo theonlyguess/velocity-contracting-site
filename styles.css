@@ -142,7 +142,12 @@ ul, ol { margin: 0; padding: 0; }
   min-width: 0;
 }
 .logo:hover { color: inherit; }
-.logo-mark svg { flex-shrink: 0; }
+.logo-img {
+  display: block;
+  height: 2.7rem;
+  width: auto;
+  max-width: min(16.5rem, 64vw);
+}
 
 .logo-text {
   display: flex;
@@ -413,15 +418,18 @@ ul, ol { margin: 0; padding: 0; }
 }
 
 .hero-visual {
-  display: none;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }
 
-.hero-illustration {
+.hero-photo {
+  display: block;
   width: 100%;
-  max-width: 22rem;
   height: auto;
+  max-height: 32rem;
+  object-fit: cover;
+  object-position: center 62%;
+  border-radius: 0.85rem;
+  aspect-ratio: 16 / 10;
 }
 
 /* Trust bar */
