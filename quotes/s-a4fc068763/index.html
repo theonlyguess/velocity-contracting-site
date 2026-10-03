@@ -260,5 +260,17 @@ function closeSheet(instant){ if(!open) return; const o = open; open = null; if(
 function zoom(src){ const z = document.createElement("div"); z.className = "zoom"; z.innerHTML = `<img src="${src}" alt="Enlarged photo">`; z.addEventListener("click", () => z.remove()); document.body.appendChild(z); }
 document.addEventListener("keydown", e => { if(e.key==="Escape"){ const z = document.querySelector(".zoom"); if(z) z.remove(); else closeSheet(); } });
 const hh = location.hash.replace("#",""); if(WHO[hh]){ who = hh; document.getElementById("who").value = hh; if(unlocked()) applyPre(); }
+/* activity log (G 10/3): every open, unlock, edit (with what is typed so far), send and text tap goes to Supabase quote_page_events; insert-only, unreadable from the page */
+const SBU = "https://onqrpoynxfnhadjnedwb.supabase.co/rest/v1/quote_page_events", SBK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucXJwb3lueGZuaGFkam5lZHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NzI4MTUsImV4cCI6MjEwMjM0ODgxNX0.yFRYC-fbDdMyT5TAq9_lw_uywWncVtq6Fz_y8dNbprU";
+function track(action, detail, snap){ try{ fetch(SBU, {method:"POST", keepalive:true, headers:{"apikey":SBK, "Authorization":"Bearer "+SBK, "Content-Type":"application/json", "Prefer":"return=minimal"},
+  body: JSON.stringify({page:"q169", who: who || location.hash.replace("#","") || "", action, detail: detail || null, snapshot: snap ? String(snap).slice(0, 19000) : null, ua: navigator.userAgent.slice(0, 200)})}).catch(() => {}); }catch(_){ } }
+function snapNow(){ try{ return lines().txt; }catch(_){ return null; } }
+track("open", location.hash);
+let editT = null;
+document.addEventListener("input", () => { if(!unlocked()) return; clearTimeout(editT); editT = setTimeout(() => track("edit", null, snapNow()), 4000); }, true);
+document.getElementById("unlock").addEventListener("click", () => setTimeout(() => { if(unlocked()) track("unlock", null, snapNow()); }, 1500));
+document.getElementById("go").addEventListener("click", () => track("send", null, snapNow()));
+document.getElementById("sms").addEventListener("click", () => track("text_button", null, snapNow()));
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "hidden" && unlocked()) track("leave", null, snapNow()); });
 render();
 </script></body></html>
