@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Repair Quote Options</title><style>
+/* Formal repair quote: letterhead band, quote facts table, scope table grouped by trade, totals, terms, prepared-by block. Prints to Letter. */
+:root{--bg:#FFFFFF;--paper:#FFFFFF;--ink:#16233F;--mut:#5B6475;--line:#E3E6EC;--head:#16233F;--headink:#FFFFFF;--alt:#F7F8FA;--accent:#EE7325;--link:#1F5FA8;
+--disp:'Barlow Condensed','Arial Narrow',sans-serif;--body:'Public Sans',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1320;--paper:#151C2D;--ink:#E8ECF4;--mut:#9AA4B8;--line:#273049;--head:#273049;--headink:#E8ECF4;--alt:#1A2236;--link:#8DB8E8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1320;--paper:#151C2D;--ink:#E8ECF4;--mut:#9AA4B8;--line:#273049;--head:#273049;--headink:#E8ECF4;--alt:#1A2236;--link:#8DB8E8;color-scheme:dark}
+*{box-sizing:border-box}html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--body);margin:0}
+.doc{max-width:860px;margin:0 auto;padding:28px 16px 56px;background:var(--paper)}
+.lh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:3px solid var(--accent);padding-bottom:12px}
+.lh .co{font:700 26px/1 var(--disp);letter-spacing:.02em}
+.lh .addr{color:var(--mut);font-size:12.5px;text-align:right;line-height:1.5}
+.title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin:22px 0 12px}
+.title h1{font:700 30px/1 var(--disp);margin:0;letter-spacing:.03em}
+.title .qn{font:500 13px var(--mono);color:var(--mut)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:22px}
+.facts div{padding:9px 12px;border-bottom:1px solid var(--line)}
+.facts div:nth-child(odd){border-right:1px solid var(--line)}
+.facts span{display:block;font:600 10.5px var(--body);letter-spacing:.09em;color:var(--mut)}
+.facts b{font-weight:600}
+.rlink{margin:-8px 0 14px;font-size:13px;color:var(--mut)}.rlink a{color:var(--link);font-weight:600}
+table{width:100%;border-collapse:collapse;margin-bottom:6px}
+th{background:var(--head);color:var(--headink);font:600 11px var(--body);letter-spacing:.08em;text-align:left;padding:8px 10px}
+th.r,td.r{text-align:right}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.grp td{background:var(--alt);font:700 13px var(--body);letter-spacing:.02em;padding-top:10px}
+tr.grp td.r{font:600 13px var(--mono)}
+td.ref{white-space:nowrap;width:72px}
+td.ref a{font:500 12.5px var(--mono);color:var(--link);text-decoration:underline;text-underline-offset:2px}
+td .it{font-weight:600}
+td .rp{color:var(--mut);font-size:13px}
+td.p{font:500 14px var(--mono);white-space:nowrap;width:108px}
+td.p.tf{font:italic 500 13px var(--body);color:var(--mut)}
+tr.opt td{color:var(--mut)}tr.opt td.p{font-style:italic}.tag{display:inline-block;font:600 10px var(--body);letter-spacing:.08em;border:1px solid var(--line);border-radius:4px;padding:1px 5px;margin-right:6px;color:var(--mut)}
+.tot{margin:14px 0 26px auto;max-width:380px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.tot div{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--line)}
+.tot div:last-child{border-bottom:0;background:var(--head);color:var(--headink);font-weight:700}
+.tot b{font-family:var(--mono);font-weight:500}
+.tot div:last-child b{font-weight:600;font-size:16px}
+h2{font:700 18px var(--disp);letter-spacing:.04em;margin:0 0 8px}
+ol.terms{margin:0 0 24px;padding-left:20px;color:var(--ink)}
+ol.terms li{margin:4px 0;max-width:72ch}
+.sig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:8px}
+.sig div{border-top:1px solid var(--ink);padding-top:6px;font-size:13px}
+.sig span{display:block;color:var(--mut);font-size:12px}
+.print{display:block;margin:22px auto 0;border:0;border-radius:10px;background:var(--accent);color:#fff;font:600 14px var(--body);padding:11px 16px;cursor:pointer}
+@media (max-width:620px){.facts{grid-template-columns:1fr}.facts div:nth-child(odd){border-right:0}.lh .addr{text-align:left}table{table-layout:fixed}th,td{padding:7px 6px}th{font-size:10px}td.ref{width:54px}td.ref a{font-size:11.5px}td.p{width:68px;font-size:13px}th.r{width:68px}th:first-child{width:54px}tr.grp td.r{font-size:12.5px}}
+@media print{:root{--bg:#fff;--paper:#fff;--ink:#16233F;--mut:#4A5263;--line:#D5D9E0;--head:#16233F;--headink:#fff;--alt:#F2F4F7;--link:#1F5FA8}
+  body{font-size:10.5px}.doc{padding:0;max-width:none}td{padding:4px 8px}th{padding:5px 8px}td .rp{font-size:11px}td .it{font-size:11px}td.p{font-size:12px}.lh .co{font-size:22px}.title h1{font-size:24px}tr.grp td{padding-top:6px}.facts div{padding:6px 10px}.title{margin:14px 0 8px}.facts{margin-bottom:14px}.tot{margin:10px 0 16px auto}.tot div{padding:6px 10px}ol.terms li{margin:2px 0}.sig{margin-top:4px}.print{display:none}tr{break-inside:avoid}thead{display:table-header-group}
+  @page{size:letter;margin:0.5in 0.5in 0.5in}}
+.onav{font-size:13px;margin:0 0 10px;color:#4B5563}.onav a{font-weight:600}.facts .wide{grid-column:1/-1}@media print{.onav{display:none}}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
+.card{border:1px solid #D1D5DB;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card .k{font-size:12px;letter-spacing:.08em;color:#6B7280;font-weight:700}.card h3{margin:0;font-size:17px}
+.card p{margin:0;font-size:13.5px;color:#374151;flex:1}.card .amt{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.card .br{font-size:12.5px;color:#4B5563;line-height:1.5}.card .go{display:flex;gap:10px;font-size:14px;font-weight:600}
+@media(max-width:720px){.cards{grid-template-columns:1fr}}</style></head><body><div class="doc">
+<div class="lh"><div class="co">VELOCITY CONTRACTING LLC</div><div class="addr">5201 Helena St, Denver, CO 80239<br>806-252-7815 · contact@velocitycontractingllc.com</div></div>
+<div class="title"><h1>REPAIR QUOTE OPTIONS</h1><span class="qn">1811 S Quebec Way #169, Denver, CO 80231</span></div>
+<p class="rlink">Two options priced from the Alpine Building Performance home inspection of 9/30/2026. Every option covers each inspection item, a licensed electrician and plumber, and the City and County of Denver permits. <a href="https://reports.spectora.com/v/reports/a6fb8d68-0b53-49a9-84c1-c4258cf3ddbe" target="_blank" rel="noopener">View the full inspection report</a></p>
+<div class="cards"><div class="card"><div class="k">OPTION A</div><h3>Full flooring replacement</h3><p>Inspection repairs with full carpet and LVP replacement</p>
+<div class="amt">$13,847</div><div class="br">Inspection items $12,606<br>Permits, inspections and licensed sign-off $1,241</div>
+<div class="go"><a href="a/">View quote VC-169-001A</a><a href="VC-169-001A-Repair-Quote.pdf">PDF</a></div></div><div class="card"><div class="k">OPTION B</div><h3>Flooring repair</h3><p>Inspection repairs with carpet cleaning and damaged LVP section replacement</p>
+<div class="amt">$9,887</div><div class="br">Inspection items $8,646<br>Permits, inspections and licensed sign-off $1,241</div>
+<div class="go"><a href="b/">View quote VC-169-001B</a><a href="VC-169-001B-Repair-Quote.pdf">PDF</a></div></div></div>
+</div></body></html>
