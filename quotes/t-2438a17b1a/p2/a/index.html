@@ -52,9 +52,10 @@ ol.terms li{margin:4px 0;max-width:72ch}
 @media print{:root{--bg:#fff;--paper:#fff;--ink:#16233F;--mut:#4A5263;--line:#D5D9E0;--head:#16233F;--headink:#fff;--alt:#F2F4F7;--link:#1F5FA8}
   body{font-size:10.5px}.doc{padding:0;max-width:none}td{padding:4px 8px}th{padding:5px 8px}td .rp{font-size:11px}td .it{font-size:11px}td.p{font-size:12px}.lh .co{font-size:22px}.title h1{font-size:24px}tr.grp td{padding-top:6px}.facts div{padding:6px 10px}.title{margin:14px 0 8px}.facts{margin-bottom:14px}.tot{margin:10px 0 16px auto}.tot div{padding:6px 10px}ol.terms li{margin:2px 0}.sig{margin-top:4px}.print{display:none}tr{break-inside:avoid}thead{display:table-header-group}
   @page{size:letter;margin:0.5in 0.5in 0.5in}}
+.tk{margin:0 7px 0 0;vertical-align:-2px;width:15px;height:15px;accent-color:var(--ink)}.ticks th:first-child{width:80px}tr.off td{opacity:.42}tr.off td.p{text-decoration:line-through}
 .sortbar{display:flex;align-items:center;gap:6px;margin:0 0 8px;font-size:13px;color:#4B5563}.sortbar button{font:600 13px inherit;font-family:inherit;padding:6px 10px;border:1px solid #CBD2DC;border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}.sortbar button.on{background:var(--ink);border-color:var(--ink);color:#fff}.trd{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B7280;margin-bottom:1px}
 .ptog{display:inline-flex;border:1px solid var(--ink);border-radius:10px;overflow:hidden;margin:0 0 10px}.ptog a{font-size:14px;font-weight:600;padding:8px 14px;color:var(--ink);text-decoration:none}.ptog a.on{background:var(--ink);color:#fff}
-.onav{font-size:13px;margin:0 0 10px;color:#4B5563}.onav a{font-weight:600}.facts .wide{grid-column:1/-1}@media print{.onav{display:none}.ptog{display:none}.sortbar{display:none}}</style></head><body><div class="doc">
+.onav{font-size:13px;margin:0 0 10px;color:#4B5563}.onav a{font-weight:600}.facts .wide{grid-column:1/-1}@media print{.onav{display:none}.ptog{display:none}.sortbar{display:none}.tk{display:none}tr.off{display:none}#toffrow{display:none}}</style></head><body><div class="doc">
 <div class="lh"><div class="co">VELOCITY CONTRACTING LLC</div>
 <div class="addr">5201 Helena St, Denver, CO 80239<br>806-252-7815 · contact@velocitycontractingllc.com</div></div>
 <div class="ptog" role="group" aria-label="Permits"><a href="../../p1/a/">No permits</a><a href="../../p2/a/" class=on>With permits</a></div><p class="onav">Option A2: Full flooring replacement, with permits · also see <a href="../b/">Option B</a> · <a href="../">All options</a></p>
@@ -78,7 +79,8 @@ ol.terms li{margin:4px 0;max-width:72ch}
  <div><span>Permits, inspections and licensed sign-off</span><b id="tperm"></b></div>
  <div id="telrow"><span>Elective items</span><b id="tel"></b></div>
  <div id="tpendrow"><span>Items to follow</span><b id="tpend"></b></div>
- <div><span>TOTAL</span><b>$18,027</b></div>
+ <div id="toffrow"><span>Switched off</span><b id="toff"></b></div>
+<div><span>TOTAL</span><b id="ttotal">$18,027</b></div>
 </div>
 <h2>TERMS</h2>
 <ol class="terms">
@@ -101,25 +103,33 @@ const R = [{"crop": "https://velocitycontractingllc.com/quotes/1811-s-quebec-169
 const REPORT = "https://reports.spectora.com/v/reports/a6fb8d68-0b53-49a9-84c1-c4258cf3ddbe";
 const esc = s => String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $ = n => "$" + n.toLocaleString("en-US");
-let priced = 0, pend = 0, sumI = 0, sumL = 0, sumP = 0, sumE = 0;
+// G 10/4: on team and master pages every priced line can be ticked off; totals follow. Seller pages carry no ticks.
+const TICKS = true, KEY = r => r.ref || (r.kind + ":" + r.title), SKEY = "q169off:" + location.pathname;
+let OFF = new Set(), MODE = "trade";
+if(TICKS){ try{ OFF = new Set(JSON.parse(localStorage.getItem(SKEY) || "{}").off || []); }catch(_){ } document.body.classList.add("ticks"); }
+let priced = 0, pend = 0, sumI = 0, sumL = 0, sumP = 0, sumE = 0, sumOff = 0;
 const TAG = {license: "LICENSED TRADE", permit: "PERMIT", elective: "ELECTIVE", sewer: "SEWER SCOPE"};
-R.forEach(r => { if(r.kind){ if(r.kind === "permit") sumP += r.price; else if(r.kind === "license") sumL += r.price; else if(r.kind === "sewer") sumI += r.price; else sumE += r.price; return; }
- if(r.price){ priced++; sumI += r.price; } else if(!r.incl) pend++; });
+function sums(){ priced = pend = sumI = sumL = sumP = sumE = sumOff = 0;
+ R.forEach(r => { const off = OFF.has(KEY(r)); if(off && r.price){ sumOff += r.price; }
+  if(r.kind){ if(off) return; if(r.kind === "permit") sumP += r.price; else if(r.kind === "license") sumL += r.price; else if(r.kind === "sewer") sumI += r.price; else sumE += r.price; return; }
+  if(r.price){ if(!off){ priced++; sumI += r.price; } } else if(!r.incl) pend++; }); }
+sums();
 const GN = Object.fromEntries(G.map(g => [g.id, g.name]));
 function rowHtml(r, showTrade){
  const tr = showTrade && GN[r.group] ? `<div class="trd">${esc(GN[r.group].split(" (")[0])}</div>` : "";
- if(r.kind) return `<tr><td class="ref"></td><td>${tr}<div class="it"><span class="tag">${TAG[r.kind]}</span>${esc(r.title)}</div><div class="rp">${esc(r.scope)}</div></td><td class="p r">${r.est ? '<span class="tag">EST</span>' : ""}${$(r.price)}</td></tr>`;
- return `<tr><td class="ref"><a href="${r.crop || (REPORT + (r.anchor ? "#" + r.anchor : ""))}" target="_blank" rel="noopener">${r.ref}</a></td>
+ const off = OFF.has(KEY(r)), tk = TICKS && r.price ? `<input type="checkbox" class="tk" data-k="${esc(KEY(r))}"${off ? "" : " checked"} aria-label="Include ${esc(r.ref || r.title)}">` : "", oc = off ? ' class="off"' : "";
+ if(r.kind) return `<tr${oc}><td class="ref">${tk}</td><td>${tr}<div class="it"><span class="tag">${TAG[r.kind]}</span>${esc(r.title)}</div><div class="rp">${esc(r.scope)}</div></td><td class="p r">${r.est ? '<span class="tag">EST</span>' : ""}${$(r.price)}</td></tr>`;
+ return `<tr${oc}><td class="ref">${tk}<a href="${r.crop || (REPORT + (r.anchor ? "#" + r.anchor : ""))}" target="_blank" rel="noopener">${r.ref}</a></td>
  <td>${tr}<div class="it">${esc(r.title)}</div><div class="rp">${esc(r.scope)}</div></td>
  <td class="p r${r.price ? "" : " tf"}">${r.est ? '<span class="tag">EST</span>' : ""}${r.price ? $(r.price) : (r.incl ? "With " + r.incl : "To follow")}</td></tr>`;
 }
 const KORD = {sewer: 1, license: 2, permit: 3, elective: 4};
 const refKey = r => r.ref ? r.ref.split(".").map(n => n.padStart(3, "0")).join(".") : "z" + (KORD[r.kind] || 9);
 function renderRows(mode){
- let html = "";
+ MODE = mode; let html = "";
  if(mode === "trade"){
   G.forEach(g => { const rs = R.filter(r => r.group === g.id); if(!rs.length) return;
-   const gs = rs.reduce((a, r) => a + (r.price || 0), 0);
+   const gs = rs.reduce((a, r) => a + (OFF.has(KEY(r)) ? 0 : (r.price || 0)), 0);
    html += `<tr class="grp"><td colspan="2">${esc(g.name)}</td><td class="r">${gs ? $(gs) : ""}</td></tr>`;
    rs.forEach(r => { html += rowHtml(r, false); }); });
  } else {
@@ -134,10 +144,24 @@ document.querySelectorAll(".sortbar button").forEach(b => b.addEventListener("cl
 const RI = R.filter(r => !r.kind), RE = R.filter(r => r.kind === "elective");
 const DUP = RI.filter(r => !r.price && r.incl).length, SEW = R.some(r => r.kind === "sewer");
 document.getElementById("cnt").textContent = RI.length + " inspection items" + (DUP ? " (" + DUP + " priced with another item)" : "") + (pend ? ", " + pend + " to follow" : "") + (SEW ? "; sewer scope" : "") + (RE.length ? "; " + RE.length + " elective items" : "");
-document.getElementById("tpriced").textContent = $(sumI);
 if(SEW) document.getElementById("tpriced").previousElementSibling.textContent = "Inspection items and sewer scope";
-if(sumL) document.getElementById("tlic").textContent = $(sumL); else document.getElementById("tlicrow").remove();
-if(sumP) document.getElementById("tperm").textContent = $(sumP); else document.getElementById("tperm").parentNode.remove();
-if(RE.length) document.getElementById("tel").textContent = RE.length + " items · " + $(sumE); else document.getElementById("telrow").remove();
+if(!R.some(r => r.kind === "license")) document.getElementById("tlicrow").remove();
+if(!R.some(r => r.kind === "permit")) document.getElementById("tperm").parentNode.remove();
+if(!RE.length) document.getElementById("telrow").remove();
 if(pend) document.getElementById("tpend").textContent = pend + " · To follow"; else { document.getElementById("tpendrow").remove(); document.getElementById("tfnote").remove(); }
+const set = (id, txt, on) => { const el = document.getElementById(id); if(!el) return; el.textContent = txt; const row = el.parentNode; if(row && row.parentNode && row.parentNode.classList.contains("tot")) row.style.display = on ? "" : "none"; };
+function paintTotals(){ sums(); const reA = RE.filter(r => !OFF.has(KEY(r))).length;
+ set("tpriced", $(sumI), true); set("tlic", $(sumL), sumL > 0); set("tperm", $(sumP), sumP > 0); set("tel", reA + " items · " + $(sumE), reA > 0);
+ set("toff", OFF.size + " · -" + $(sumOff), OFF.size > 0); set("ttotal", $(sumI + sumL + sumP + sumE), true); }
+paintTotals();
+if(TICKS){
+ const SBU = "https://onqrpoynxfnhadjnedwb.supabase.co/rest/v1/quote_page_events", SBK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucXJwb3lueGZuaGFkam5lZHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NzI4MTUsImV4cCI6MjEwMjM0ODgxNX0.yFRYC-fbDdMyT5TAq9_lw_uywWncVtq6Fz_y8dNbprU";
+ document.getElementById("rows").addEventListener("change", e => { const el = e.target; if(!el.classList || !el.classList.contains("tk")) return;
+  const k = el.dataset.k; if(el.checked) OFF.delete(k); else OFF.add(k); renderRows(MODE); paintTotals();
+  const total = sumI + sumL + sumP + sumE, off = [...OFF];
+  try{ localStorage.setItem(SKEY, JSON.stringify({off, total})); }catch(_){ }
+  try{ fetch(SBU, {method: "POST", keepalive: true, headers: {"apikey": SBK, "Authorization": "Bearer " + SBK, "Content-Type": "application/json", "Prefer": "return=minimal"},
+   body: JSON.stringify({page: "q169", who: "team", action: el.checked ? "line_on" : "line_off", detail: location.pathname + " " + k,
+   snapshot: JSON.stringify({path: location.pathname, off, total}), ua: navigator.userAgent.slice(0, 200)})}).catch(() => {}); }catch(_){ } });
+}
 </script></body></html>
