@@ -27,6 +27,15 @@ select{font-weight:600;flex:1 1 220px}
 .thumbs{display:flex;gap:6px;overflow-x:auto}.thumbs img{width:84px;height:64px;object-fit:cover;border-radius:7px;border:1px solid var(--line);flex:0 0 auto;cursor:zoom-in}
 .was{font:500 12px var(--mono,monospace);color:var(--mut,#6B7280);opacity:.7;background:var(--soft,#F3F4F6);border-radius:7px;padding:5px 8px;margin:6px 0 4px;user-select:none}
 .pl{font:700 11.5px var(--body);letter-spacing:.04em;color:var(--ink,#16233F);margin:8px 0 2px}
+.cmp{display:grid;grid-template-columns:minmax(86px,1.15fr) 1fr 1fr .9fr;gap:6px 6px;align-items:center;margin:6px 0}
+.cmp .ch{font:600 10.5px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.cmp .rl{font:600 12px var(--body);line-height:1.2}
+.cmp .was{font-family:var(--mono);color:var(--mut);opacity:.75}
+.cmp input{width:100%;font-family:var(--mono);background:var(--bg)}
+.cmp output{font-family:var(--mono);font-weight:700}
+.cmp .up{color:#C2410C}.cmp .down{color:#15803D}
+.why{display:grid;gap:3px;font:600 11px var(--body);letter-spacing:.04em;text-transform:uppercase;color:#C2410C;margin:2px 0 6px}
+.why textarea{min-height:44px;font:400 14px var(--body);text-transform:none;letter-spacing:0;color:var(--ink,#16233F)}
 .money{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .money label{font:600 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);display:grid;gap:3px}
 .money input{width:100%;font-family:var(--mono);background:var(--bg)}
@@ -121,17 +130,26 @@ const PERMIT = new Set(["8-7-1","11-2-1","11-3-1","4-9-1","7-2-1","7-7-1","7-8-1
 const ptot = v => money(v.pl) + money(v.pm);
 const FIRST = {"javier": {"4-5-1": {"l": 100, "m": 50, "t": 150}, "4-5-2": {"l": 50, "m": 50, "t": 100}, "4-5-3": {"l": 100, "m": 100, "t": 200}, "4-7-1": {"l": 200, "m": 100, "t": 300}, "4-9-1": {"l": 200, "m": 200, "t": 400}, "7-2-1": {"l": 150, "m": 50, "t": 200}, "7-4-1": {"l": 100, "m": 50, "t": 150}, "7-5-1": {"l": 100, "m": 50, "t": 150}, "7-5-2": {"l": 100, "m": 100, "t": 200}, "7-5-3": {"l": 250, "m": 150, "t": 400}, "7-8-1": {"l": 250, "m": 150, "t": 400}, "8-9-1": {"l": 200, "m": 50, "t": 250}, "10-8-1": {"l": 75, "m": 75, "t": 150}, "11-2-1": {"l": 100, "m": 100, "t": 200}, "11-3-1": {"l": 100, "m": 100, "t": 200}, "11-4-1": {"l": 50, "m": 50, "t": 100}, "11-5-1": {"l": 50, "m": 50, "t": 100}, "11-5-3": {"l": 100, "m": 100, "t": 200}, "11-6-1": {"l": 200, "m": 100, "t": 300}, "11-6-2": {"l": 300, "m": 100, "t": 400}, "11-7-1": {"l": 200, "m": 100, "t": 300}, "11-7-2": {"l": 200, "m": 100, "t": 300}, "11-7-3": {"l": 50, "m": 50, "t": 100}, "11-9-1": {"l": 50, "m": 50, "t": 100}, "11-9-2": {"l": 200, "m": 100, "t": 300}, "11-10-1": {"l": 100, "m": 50, "t": 150}, "x-laundry": {"l": 300, "m": 200, "t": 500}, "x-carpet": {"l": 600, "m": 1000, "t": 1600}, "x-wood": {"l": 1200, "m": 1200, "t": 2400}, "x-paint": {"l": 4000, "m": 1200, "t": 5200}}, "elec": {"5-5-1": {"l": 25, "m": 5, "t": 30}, "5-5-2": {"l": 50, "m": 19, "t": 69}, "5-6-1": {"l": 150, "m": 120, "t": 270}, "8-7-1": {"l": 125, "m": 45, "t": 170}, "11-2-1": {"l": 115, "m": 265, "t": 380}, "11-3-1": {"l": 110, "m": 0, "t": 110}, "x-laundry": {"l": 150, "m": 350, "t": 500}, "pc2": {"l": 150, "m": 125, "t": 275}, "pc3": {"l": 150, "m": 125, "t": 275}, "pc4": {"l": 150, "m": 125, "t": 275}, "pc5": {"l": 100, "m": 100, "t": 200}}, "hvac": {"7-7-1": {"l": 300, "m": 300, "t": 600}, "7-8-1": {"l": 150, "m": 150, "t": 300}, "8-1-1": {"l": 250, "m": 0, "t": 250}, "8-8-1": {"l": 20, "m": 6, "t": 26}}}, FIRSTD = {"javier": "Oct 2", "elec": "Oct 2", "hvac": "Oct 3"};
 const wasRow = id => { const f = (FIRST[who]||{})[id]; return f ? `<div class="was">Your first quote (${FIRSTD[who]}): labor ${fmt(f.l)} · material ${fmt(f.m)} · total ${fmt(f.t)}</div>` : ""; };
-function moneyRow(id, v, kind){ const P = PERMIT.has(id); return `${wasRow(id)}${P?'<div class="pl">Without permit / Sin permiso</div>':''}<div class="money">
-  <label>Labor / Mano<input id="l-${id}" data-${kind}="${id}" data-f="l" inputmode="decimal" placeholder="$" value="${esc(v.l||"")}"></label>
-  <label>Material<input id="m-${id}" data-${kind}="${id}" data-f="m" inputmode="decimal" placeholder="$" value="${esc(v.m||"")}"></label>
-  <label>Total<output id="t-${id}">${tot(v)?fmt(tot(v)):"$0"}</output></label></div>
-  ${P?`<div class="pl">With permit, including the permit and licensed sign-off / Con permiso y aprobación con licencia</div><div class="money">
-  <label>Labor / Mano<input id="pl-${id}" data-${kind}="${id}" data-f="pl" inputmode="decimal" placeholder="$" value="${esc(v.pl||"")}"></label>
-  <label>Material<input id="pm-${id}" data-${kind}="${id}" data-f="pm" inputmode="decimal" placeholder="$" value="${esc(v.pm||"")}"></label>
-  <label>Total<output id="pt-${id}">${ptot(v)?fmt(ptot(v)):"$0"}</output></label></div>`:""}
-  <div class="dates"><label>Start / Inicio<input type="date" id="s-${id}" data-${kind}="${id}" data-f="s" value="${esc(v.s||topD().s||"")}"></label>
-  <label>Done / Termina<input type="date" id="e-${id}" data-${kind}="${id}" data-f="e" value="${esc(v.e||topD().e||"")}"></label>
-  <label>Days / Días<input id="w-${id}" data-${kind}="${id}" data-f="w" inputmode="decimal" placeholder="days" value="${esc(v.w||"")}"></label></div>`; }
+function moneyRow(id, v, kind){ const P = PERMIT.has(id), f = (FIRST[who]||{})[id], d = `data-${kind}="${id}"`;
+  const inp = (p, fld, ph) => `<input id="${p}-${id}" ${d} data-f="${fld}" inputmode="decimal" placeholder="${ph}" value="${esc(v[fld]||"")}">`;
+  const ch = f && changed(f, v);
+  return `<div class="cmp"><span></span><span class="ch">Labor / Mano</span><span class="ch">Material</span><span class="ch">Total</span>
+  ${f?`<span class="rl was">First quote (${FIRSTD[who]})</span><span class="was">${fmt(f.l)}</span><span class="was">${fmt(f.m)}</span><span class="was">${fmt(f.t)}</span>`:""}
+  <span class="rl">${P?"Now, without permit / Sin permiso":"Now / Ahora"}</span>${inp("l","l","$")}${inp("m","m","$")}<output id="t-${id}">${tot(v)?fmt(tot(v)):"$0"}</output>
+  ${f?`<span class="rl">Change / Cambio</span>${deltaCells(id, f, v)}`:""}
+  ${P?`<span class="rl">Now, with permit and licensed sign-off / Con permiso</span>${inp("pl","pl","$")}${inp("pm","pm","$")}<output id="pt-${id}">${ptot(v)?fmt(ptot(v)):"$0"}</output>`:""}</div>
+  ${f?`<label class="why" id="whyw-${id}"${ch?"":" hidden"}>Why it changed / Por qué cambió<textarea id="y-${id}" ${d} data-f="why" placeholder="Short reason / razón corta">${esc(v.why||"")}</textarea></label>`:""}
+  <div class="dates"><label>Start / Inicio<input type="date" id="s-${id}" ${d} data-f="s" value="${esc(v.s||topD().s||"")}"></label>
+  <label>Done / Termina<input type="date" id="e-${id}" ${d} data-f="e" value="${esc(v.e||topD().e||"")}"></label>
+  <label>Days / Días<input id="w-${id}" ${d} data-f="w" inputmode="decimal" placeholder="days" value="${esc(v.w||"")}"></label></div>`; }
+const changed = (f, v) => money(v.l) !== f.l || money(v.m) !== f.m;
+const sgn = n => n === 0 ? "$0" : (n > 0 ? "+" : "-") + fmt(Math.abs(n));
+const cls = n => n > 0 ? "up" : (n < 0 ? "down" : "");
+function deltaCells(id, f, v){ const a = money(v.l) - f.l, b = money(v.m) - f.m, c = tot(v) - f.t;
+  return `<output id="dl-${id}" class="${cls(a)}">${sgn(a)}</output><output id="dm-${id}" class="${cls(b)}">${sgn(b)}</output><output id="dt-${id}" class="${cls(c)}">${sgn(c)}</output>`; }
+function refreshDelta(id, v){ const f = (FIRST[who]||{})[id]; if(!f) return;
+  [["dl", money(v.l) - f.l], ["dm", money(v.m) - f.m], ["dt", tot(v) - f.t]].forEach(([p, n]) => { const o = document.getElementById(p + "-" + id); if(o){ o.textContent = sgn(n); o.className = cls(n); } });
+  const w = document.getElementById("whyw-" + id); if(w) w.hidden = !changed(f, v); }
 const topD = () => dates[who] || {};
 const fd8 = d => d ? new Date(d+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}) : "";
 function photoRow(id){ const p = photos[id]; return `<div class="ph"><label class="btn" for="ph-${id}">${p?"Change photo":"Add photo / Foto"}</label><input type="file" id="ph-${id}" accept="image/*" data-ph="${id}">
@@ -179,10 +197,10 @@ function rowsFor(){
 function lines(){
   if(!unlocked()) return {txt:"", s:[0,0,0], L:0, M:0};
   const s = [0,0,0,0]; let L = 0, M = 0; const out = [`1811 S Quebec Way #169 quote from ${WHO[who].n}`]; if(topD().s||topD().e||topD().d) out.push(`Overall: start ${fd8(topD().s)||"?"}, done ${fd8(topD().e)||"?"}, duration ${topD().d?topD().d+" work days":"?"}`);
-  rowsFor().forEach(r => { const v = r.v, t = tot(v); if(!(v.l||v.m||v.pl||v.pm||v.n||photos[r.id])) return;
+  rowsFor().forEach(r => { const v = r.v, t = tot(v); if(!(v.l||v.m||v.pl||v.pm||v.why||v.n||photos[r.id])) return;
     s[r.sec] += t; L += money(v.l); M += money(v.m);
     const sd = v.s||topD().s, ed = v.e||topD().e, wd = v.w ? ` / ${v.w} days` : "";
-    out.push(`${r.tag} ${r.name}: labor ${fmt(money(v.l))} / material ${fmt(money(v.m))} / total ${fmt(t)}${sd||ed?` / ${sd?"start "+fd8(sd):""}${sd&&ed?", ":""}${ed?"done "+fd8(ed):""}`:""}${wd}${(v.pl||v.pm)?` / with permit: labor ${fmt(money(v.pl))} / material ${fmt(money(v.pm))} / total ${fmt(ptot(v))}`:""}${v.n?" ("+v.n+")":""}${photos[r.id]?" [photo]":""}`); });
+    out.push(`${r.tag} ${r.name}: labor ${fmt(money(v.l))} / material ${fmt(money(v.m))} / total ${fmt(t)}${sd||ed?` / ${sd?"start "+fd8(sd):""}${sd&&ed?", ":""}${ed?"done "+fd8(ed):""}`:""}${wd}${(v.pl||v.pm)?` / with permit: labor ${fmt(money(v.pl))} / material ${fmt(money(v.pm))} / total ${fmt(ptot(v))}`:""}${v.why?" (why: "+v.why+")":""}${v.n?" ("+v.n+")":""}${photos[r.id]?" [photo]":""}`); });
   out.push(`Inspection items ${fmt(s[1])}; options and electives ${fmt(s[2])}; added items ${fmt(s[3])}; labor ${fmt(L)}; material ${fmt(M)}`);
   return {txt: out.join("\n"), s, L, M};
 }
@@ -218,7 +236,7 @@ document.addEventListener("change", e => { const t = e.target; if(t.id!=="ds" &&
   save(); render(); });
 document.addEventListener("input", e => { const t = e.target; if(t.id==="ds" || t.id==="de") return;
   if(t.id==="dd"){ dates[who] = Object.assign({}, topD(), {d: t.value}); save(); totals(); return; }
-  if(t.dataset.k){ vals[t.dataset.k] = Object.assign({}, vals[t.dataset.k], {[t.dataset.f]: t.value}); const o = document.getElementById("t-"+t.dataset.k); if(o) o.textContent = fmt(tot(vals[t.dataset.k])); const po = document.getElementById("pt-"+t.dataset.k); if(po) po.textContent = fmt(ptot(vals[t.dataset.k])); }
+  if(t.dataset.k){ vals[t.dataset.k] = Object.assign({}, vals[t.dataset.k], {[t.dataset.f]: t.value}); const o = document.getElementById("t-"+t.dataset.k); if(o) o.textContent = fmt(tot(vals[t.dataset.k])); const po = document.getElementById("pt-"+t.dataset.k); if(po) po.textContent = fmt(ptot(vals[t.dataset.k])); refreshDelta(t.dataset.k, vals[t.dataset.k]); }
   if(t.dataset.a){ adds[t.dataset.a] = Object.assign({}, adds[t.dataset.a], {[t.dataset.f]: t.value}); const o = document.getElementById("t-"+t.dataset.a); if(o) o.textContent = fmt(tot(adds[t.dataset.a])); }
   if(t.dataset.k || t.dataset.a || t.id==="phone"){ save(); totals(); } });
 async function shrink(file){ const img = await createImageBitmap(file); const sc = Math.min(1, 1400/Math.max(img.width, img.height));
