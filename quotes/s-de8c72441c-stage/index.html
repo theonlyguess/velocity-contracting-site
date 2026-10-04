@@ -112,7 +112,9 @@ const RETIRE = ["pc1","pc6"];
 try{ const j = JSON.parse(localStorage.getItem(LS)||"{}"); vals = j.vals||{}; adds = j.adds||{}; ok = j.ok||{}; dates = j.dates||{}; RETIRE.forEach(id => delete adds[id]); if(j.phone) document.getElementById("phone").value = j.phone; }catch(e){}
 function save(){ try{ localStorage.setItem(LS, JSON.stringify({vals, adds, ok, dates, phone: document.getElementById("phone").value})); }catch(e){} }
 const unlocked = () => !!who && ok[who] === PH[who];
-function mine(f){ const c = WHO[who].crafts; return c.includes(f.craft) || f.also.some(a => c.includes(a)); }
+// G 10/3: alarms went to the electrician (hardwired) and the furnace gas valve to the HVAC company, so they leave Javier's page
+const HIDE = {javier: ["11.2.1", "11.3.1", "7.8.1"]};
+function mine(f){ if((HIDE[who]||[]).includes(f.ref)) return false; const c = WHO[who].crafts; return c.includes(f.craft) || f.also.some(a => c.includes(a)); }
 const tot = v => money(v.l) + money(v.m);
 // G 10/4: lines that may need a permit carry two prices, without permit and with permit (permit and licensed sign-off included)
 const PERMIT = new Set(["8-7-1","11-2-1","11-3-1","4-9-1","7-2-1","7-7-1","7-8-1","x-laundry"]);
