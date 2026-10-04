@@ -41,9 +41,9 @@ function render(){
   return `<div class="tile"><div class="k">Option ${v} · ${mode === "1" ? "No permits" : "With permits"}</div><h3>${q.name}</h3><div class="d">${q.desc}</div>
    <div class="amt">${$(q.total)}</div>${adj ? `<div class="adj">${$(adj.total)} with ${adj.off.length} line${adj.off.length > 1 ? "s" : ""} switched off</div>` : ""}
    <div class="br">${lines.map(x => `${x[0]} <b>${$(x[1])}</b>`).join("<br>")}</div>
-   <div class="m">${MASTER ? "Sub cost " + $(q.sub) + " · margin " + $(Math.round(q.sub * 0.2)) + " · " : ""}${diff >= 0 ? "+" : "-"}${$(Math.abs(diff))} vs ${other === "1" ? "no permits" : "with permits"}</div>
+   <div class="m">${diff >= 0 ? "+" : "-"}${$(Math.abs(diff))} vs ${other === "1" ? "no permits" : "with permits"}</div>
    <div class="go"><a href="${BASE}p${mode}/${v.toLowerCase()}/">Open quote ${v}</a></div></div>`; }).join("");
- document.getElementById("note").innerHTML = NOTE[mode].map(x => `<li>${x}</li>`).join("") + (MASTER ? "<li>Margin is 20 pct of sub cost on every line.</li>" : "");
+ document.getElementById("note").innerHTML = NOTE[mode].map(x => `<li>${x}</li>`).join("");
  history.replaceState(null, "", "?mode=" + mode);
 }
 document.getElementById("mode").addEventListener("click", e => { if(e.target.dataset.m){ mode = e.target.dataset.m; render(); } });
