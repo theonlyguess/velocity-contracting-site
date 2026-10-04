@@ -1,6 +1,34 @@
 <!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content=noindex><title>Quote Options</title>
-<style>body{font:15px/1.45 -apple-system,Segoe UI,sans-serif;margin:0;background:#fff;color:#16233F}main{max-width:900px;margin:0 auto;padding:20px 16px}h1{font-size:21px;margin:0 0 4px}p{color:#4B5563;margin:0 0 12px}
-table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid #E5E7EB}th{background:#16233F;color:#fff;font-size:12px;letter-spacing:.05em}a{font-weight:700;color:#16233F;font-size:17px}.s{font-size:12.5px;color:#6B7280}ul{color:#374151;padding-left:18px}</style></head>
-<body><main><h1>1811 S Quebec: internal quote options</h1><p>Built on the latest sub numbers (Carlos and Gabriel best and final 10/4; Javier 10/3 2:16 PM until he answers). Every quote includes the sewer descale and rescope. Internal only.</p>
-<table><thead><tr><th>QUOTE</th><th>OPTION 1, NO PERMITS</th><th>OPTION 2, WITH PERMITS</th><th>PERMIT COST</th></tr></thead><tbody><tr><td><b>A</b><br><span class=s>Inspection repairs, full flooring</span></td><td><a href='p1/a/'>$16,146</a><br><span class=s>sub $13,455 · margin $2,691</span></td><td><a href='p2/a/'>$18,027</a><br><span class=s>sub $14,980 · margin $2,996</span></td><td>$1,881</td></tr><tr><td><b>B</b><br><span class=s>Inspection repairs, patch flooring</span></td><td><a href='p1/b/'>$10,026</a><br><span class=s>sub $8,355 · margin $1,671</span></td><td><a href='p2/b/'>$11,907</a><br><span class=s>sub $9,880 · margin $1,976</span></td><td>$1,881</td></tr><tr><td><b>C</b><br><span class=s>Full flooring plus all electives</span></td><td><a href='p1/c/'>$25,356</a><br><span class=s>sub $21,130 · margin $4,226</span></td><td><a href='p2/c/'>$27,537</a><br><span class=s>sub $22,905 · margin $4,581</span></td><td>$2,181</td></tr></tbody></table>
-<ul><li>Option 1: Javier's own valve prices, no sign-off, no permit lines.</li><li>Option 2: Infinity's licensed plumber on the valves plus the Denver plumbing permit; Carlos's with-permit prices plus his $535 sign-off and permit; Gabriel's with-permit prices (permit inside).</li><li>Margin is 20 pct of sub cost on every line; permit fees at cost.</li></ul></main></body></html>
+<style>:root{--ink:#16233F;--acc:#EE7325;--mut:#6B7280;--line:#E5E7EB;--soft:#F6F7F9}
+body{font:15px/1.45 -apple-system,Segoe UI,sans-serif;margin:0;background:#fff;color:var(--ink)}main{max-width:1040px;margin:0 auto;padding:20px 16px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 14px}
+.tog{display:inline-flex;border:1px solid var(--ink);border-radius:10px;overflow:hidden;margin:4px 0 16px}.tog button{font:600 15px inherit;font-family:inherit;padding:10px 16px;border:0;background:#fff;color:var(--ink);cursor:pointer}.tog button.on{background:var(--ink);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:760px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px}.k{font:700 12px inherit;letter-spacing:.08em;color:var(--mut)}.card h3{margin:0;font-size:17px}.d{color:#374151;font-size:13.5px;flex:1}
+.amt{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}.br{font-size:13px;color:#374151;line-height:1.6}.br b{font-variant-numeric:tabular-nums}.m{font-size:12.5px;color:var(--mut)}
+.go{margin-top:6px}.go a{font-weight:700;color:var(--ink)}.note{margin-top:16px;color:#374151;font-size:13.5px}.note li{margin:3px 0}.mode{font-weight:700;color:var(--acc)}</style></head>
+<body><main><h1>1811 S Quebec repair quotes</h1><p class=sub>For Linz and the team. Pick the permit approach at the top; every card updates. The seller receives one quote, as a hyperlinked PDF, for the option chosen.</p>
+<div class=tog role=group aria-label="Permits"><button data-m="1">No permits</button><button data-m="2">With permits</button></div>
+<div class=cards id=cards></div>
+<ul class=note id=note></ul></main>
+<script>
+const D = {"1": {"A": {"total": 16146, "sub": 13455, "parts": {"item": 15606, "license": 0, "permit": 0, "elective": 0, "sewer": 540}, "name": "Full flooring replacement", "desc": "Inspection repairs with full carpet and LVP replacement", "qno": "VC-169-001A"}, "B": {"total": 10026, "sub": 8355, "parts": {"item": 9486, "license": 0, "permit": 0, "elective": 0, "sewer": 540}, "name": "Flooring repair", "desc": "Inspection repairs with carpet cleaning and damaged LVP section replacement", "qno": "VC-169-001B"}, "C": {"total": 25356, "sub": 21130, "parts": {"item": 15606, "license": 0, "permit": 0, "elective": 9210, "sewer": 540}, "name": "Full flooring replacement plus elective items", "desc": "Option A plus the elective items requested beyond the inspection", "qno": "VC-169-001C"}}, "2": {"A": {"total": 18027, "sub": 14980, "parts": {"item": 16794, "license": 0, "permit": 693, "elective": 0, "sewer": 540}, "name": "Full flooring replacement", "desc": "Inspection repairs with full carpet and LVP replacement", "qno": "VC-169-001A"}, "B": {"total": 11907, "sub": 9880, "parts": {"item": 10674, "license": 0, "permit": 693, "elective": 0, "sewer": 540}, "name": "Flooring repair", "desc": "Inspection repairs with carpet cleaning and damaged LVP section replacement", "qno": "VC-169-001B"}, "C": {"total": 27537, "sub": 22905, "parts": {"item": 16794, "license": 642, "permit": 51, "elective": 9510, "sewer": 540}, "name": "Full flooring replacement plus elective items", "desc": "Option A plus the elective items requested beyond the inspection", "qno": "VC-169-001C"}}};
+const $ = n => "$" + Number(n).toLocaleString("en-US");
+const NOTE = {"1": ["No permits: Javier's own valve prices, no licensed sign-off, no permit lines.", "Every quote includes the sewer descale and rescope.", "Margin is 20 pct of sub cost on every line."],
+              "2": ["With permits: Infinity's licensed plumber on the valves plus the Denver plumbing permit; Carlos's with-permit prices plus his $535 sign-off and permit; Gabriel's with-permit prices, permit inside.", "Every quote includes the sewer descale and rescope.", "Margin is 20 pct of sub cost on every line; permit fees at cost."]};
+let mode = new URLSearchParams(location.search).get("mode") === "2" ? "2" : "1";
+function render(){
+  document.querySelectorAll(".tog button").forEach(b => b.classList.toggle("on", b.dataset.m === mode));
+  const other = mode === "1" ? "2" : "1";
+  document.getElementById("cards").innerHTML = ["A","B","C"].map(v => { const q = D[mode][v], o = D[other][v], p = q.parts, diff = q.total - o.total;
+    const lines = [["Inspection items" + (p.sewer ? " + sewer" : ""), p.item + (p.sewer||0)], ["Permits, inspections and licensed sign-off", p.permit + p.license], ["Elective items", p.elective]].filter(x => x[1]);
+    return `<div class=card><div class=k>OPTION ${v} · <span class=mode>${mode === "1" ? "NO PERMITS" : "WITH PERMITS"}</span></div><h3>${q.name}</h3><div class=d>${q.desc}</div>
+      <div class=amt>${$(q.total)}</div><div class=br>${lines.map(x => `${x[0]} <b>${$(x[1])}</b>`).join("<br>")}</div>
+      <div class=m>Sub cost ${$(q.sub)} · margin ${$(Math.round(q.sub*0.2))} · ${diff >= 0 ? "+" : "-"}${$(Math.abs(diff))} vs ${other === "1" ? "no permits" : "with permits"}</div>
+      <div class=go><a href="p${mode}/${v.toLowerCase()}/">Open quote ${v}</a></div></div>`; }).join("");
+  document.getElementById("note").innerHTML = NOTE[mode].map(x => `<li>${x}</li>`).join("");
+  history.replaceState(null, "", "?mode=" + mode);
+}
+document.querySelectorAll(".tog button").forEach(b => b.addEventListener("click", () => { mode = b.dataset.m; render(); }));
+render();
+</script></body></html>
