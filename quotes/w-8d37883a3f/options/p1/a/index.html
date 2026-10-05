@@ -235,8 +235,8 @@ function paintTotals(){ sums(); const reA = RE.filter(r => !OFF.has(KEY(r))).len
  set("tpriced", $(sumI), true); set("tlic", $(sumL), sumL > 0); set("tperm", $(sumP), sumP > 0); set("tel", reA + " items · " + $(sumE), reA > 0);
  set("toff", OFF.size + " · -" + $(sumOff), OFF.size > 0); set("ttotal", $(sumI + sumL + sumP + sumE), true); }
 paintTotals();
-if(TICKS && COLLAPSE){   // G 10/4: the quote details block folds to one line on team and master pages
- const fx = document.querySelector(".facts");
+if(TICKS){   // ticks and their change log run on every page; the quote details fold only on team and master pages
+ const fx = COLLAPSE ? document.querySelector(".facts") : null;
  if(fx){ const val = lab => { const d = [...fx.querySelectorAll("div")].find(x => (x.querySelector("span") || {}).textContent === lab); return d ? d.querySelector("b").textContent : ""; };
   const sum = [val("OPTION").replace(/^Option [ABC][12]: /, ""), "valid through " + val("VALID THROUGH")].filter(Boolean).join(" · ");
   fx.insertAdjacentHTML("beforebegin", `<button class="fx" aria-expanded="false"><span class="fxk">Quote details</span><span class="fxs">${esc(sum)}</span><span class="chev">▸</span></button>`);
