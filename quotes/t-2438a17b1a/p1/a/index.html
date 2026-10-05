@@ -175,7 +175,6 @@ function rowHtml(r, showTrade){
 }
 function detRow(r){ if(!DET.has(KEY(r))) return ""; const s = r.subd; let x = "";
  if(r.finding) x += `<div class="dl"><span>Inspector found${r.loc ? " · " + esc(r.loc) : ""}</span>${esc(r.finding)}</div>`;
- if(s) x += `<div class="dl dm"><span>Master only${s.who ? " · " + esc(s.who) : ""}</span>${s.labor != null ? "Labor " + $(s.labor) + " · " : ""}${s.material != null ? "Material " + $(s.material) + " · " : ""}Sub total ${$(s.total || 0)} · Sell ${$(r.price || 0)} · Margin ${$((r.price || 0) - (s.total || 0))}</div>`;
  return `<tr class="det"><td></td><td colspan="2">${x}</td></tr>`; }
 const KORD = {sewer: 1, license: 2, permit: 3, elective: 4};
 const refKey = r => r.ref ? r.ref.split(".").map(n => n.padStart(3, "0")).join(".") : "z" + (KORD[r.kind] || 9);
