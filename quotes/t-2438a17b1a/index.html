@@ -43,9 +43,11 @@ const SKEY = (m, v) => "q169off:" + BASE + "p" + m + "/" + v + "/";
 function offSet(m){ const s = new Set(); ["a", "b"].forEach(v => { try{ (JSON.parse(localStorage.getItem(SKEY(m, v)) || "{}").off || []).forEach(k => s.add(k)); }catch(_){ } }); return s; }
 let OFFM = {"1": offSet("1"), "2": offSet("2")};
 function allRows(m){ return C[m].groups.flatMap(g => g.rows); }
-function saveOff(m, what){ const off = [...OFFM[m]], rows = allRows(m);
+function writeBoth(m){ const off = [...OFFM[m]], rows = allRows(m);
  ["a", "b"].forEach(v => { const full = v === "a" ? C[m].ta : C[m].tb, cut = rows.filter(r => OFFM[m].has(r.k)).reduce((s, r) => s + ((v === "a" ? r.a : r.b) || 0), 0);
-  try{ localStorage.setItem(SKEY(m, v), JSON.stringify({off, total: full - cut})); }catch(_){ } });
+  try{ localStorage.setItem(SKEY(m, v), JSON.stringify({off, total: full - cut})); }catch(_){ } }); }
+["1", "2"].forEach(m => { if(OFFM[m].size) writeBoth(m); });   // one set of ticks per permits mode, the same on A and B
+function saveOff(m, what){ const off = [...OFFM[m]]; writeBoth(m);
  try{ fetch("https://onqrpoynxfnhadjnedwb.supabase.co/rest/v1/quote_page_events", {method: "POST", keepalive: true, headers: {"apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucXJwb3lueGZuaGFkam5lZHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NzI4MTUsImV4cCI6MjEwMjM0ODgxNX0.yFRYC-fbDdMyT5TAq9_lw_uywWncVtq6Fz_y8dNbprU", "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucXJwb3lueGZuaGFkam5lZHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NzI4MTUsImV4cCI6MjEwMjM0ODgxNX0.yFRYC-fbDdMyT5TAq9_lw_uywWncVtq6Fz_y8dNbprU", "Content-Type": "application/json", "Prefer": "return=minimal"},
   body: JSON.stringify({page: "q169", who: MASTER ? "master" : "team", action: "front_" + what, detail: BASE + " p" + m, snapshot: JSON.stringify({mode: m, off}), ua: navigator.userAgent.slice(0, 200)})}).catch(() => {}); }catch(_){ } }
 const $ = n => "$" + Number(n).toLocaleString("en-US");
