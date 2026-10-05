@@ -116,7 +116,7 @@ tr.grp .tkg{margin-right:8px}tr.grp.off td{opacity:.5}
  <div class="wide"><span>ITEMS</span><b id="cnt"></b></div>
 </div>
 <p class="rlink" id="rlink">Each item number below opens that item in the inspection report. <a href="https://reports.spectora.com/v/reports/a6fb8d68-0b53-49a9-84c1-c4258cf3ddbe" target="_blank" rel="noopener">View the full inspection report</a></p>
-<div class="tiers"><div class="tier t1"><span>Expected before closing</span><b id="tappr">$779</b><i>4 items: the lender's appraisal and Colorado's carbon monoxide alarm law</i></div><div class="tier t2"><span>Health and safety</span><b id="ths">$4,943</b><i>12 items, including the ones above and the sewer line</i></div><div class="tier t3"><span>Full scope</span><b id="tall">$16,107</b><i>every inspection item priced below</i></div></div><div class="bento" id="bento"></div><div class="sortbar" role="group" aria-label="Sort"><span>Sort</span><button data-s="trade" class="on">By trade</button><button data-s="report">Inspection order</button><button data-s="dollar">Largest $</button></div>
+<div class="tiers"><div class="tier t1"><span>Expected before closing</span><b id="tappr">$779</b><i>4 items: the lender's appraisal and Colorado's carbon monoxide alarm law</i></div><div class="tier t2"><span>Health and safety</span><b id="ths">$4,943</b><i>12 items, including the ones above and the sewer line</i></div><div class="tier t3"><span>Full scope</span><b id="tall">$16,107</b><i>every inspection item priced below</i></div></div><div class="bento" id="bento"></div><div class="sortbar" role="group" aria-label="Sort"><span>Sort</span><button data-s="priority">Priority</button><button data-s="trade" class="on">By trade</button><button data-s="report">Inspection order</button><button data-s="dollar">Largest $</button></div>
 <table><thead><tr><th>REPORT ITEM</th><th>REPAIR</th><th class="r">PRICE</th></tr></thead><tbody id="rows"></tbody></table>
 <div class="tot">
  <div><span>Inspection items</span><b id="tpriced"></b></div>
@@ -149,9 +149,9 @@ const REPORT = "https://reports.spectora.com/v/reports/a6fb8d68-0b53-49a9-84c1-c
 const esc = s => String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $ = n => "$" + n.toLocaleString("en-US");
 // G 10/4: on team and master pages every priced line can be ticked off; totals follow. Seller pages carry no ticks.
-const TICKS = true, KEY = r => r.ref || (r.kind + ":" + r.title), SKEY = "q169off:" + location.pathname;
+const TICKS = true, COLLAPSE = true, WHO = "team", KEY = r => r.ref || (r.kind + ":" + r.title), SKEY = "q169off:" + location.pathname;
 let OFF = new Set(), MODE = "trade", DET = new Set(), PRINTING = false;
-let COLL = new Set(TICKS ? G.map(g => g.id) : []);   // G 10/4: team and master open collapsed to trade totals; the seller page shows every line
+let COLL = new Set(COLLAPSE ? G.map(g => g.id) : []);   // G 10/4: team and master open collapsed to trade totals; the seller page shows every line
 if(TICKS){ try{ OFF = new Set(JSON.parse(localStorage.getItem(SKEY) || "{}").off || []); }catch(_){ } document.body.classList.add("ticks"); }
 let priced = 0, pend = 0, sumI = 0, sumL = 0, sumP = 0, sumE = 0, sumOff = 0;
 const TAG = {license: "LICENSED TRADE", permit: "PERMIT", elective: "ELECTIVE", sewer: "SEWER SCOPE"};
@@ -183,13 +183,16 @@ function renderRows(mode){
  if(mode === "trade"){
   G.forEach(g => { const rs = R.filter(r => r.group === g.id); if(!rs.length) return;
    const gs = rs.reduce((a, r) => a + (OFF.has(KEY(r)) ? 0 : (r.price || 0)), 0);
-   const cl = COLL.has(g.id) && !PRINTING, chev = TICKS ? `<span class="chev">${cl ? "▸" : "▾"}</span>` : "";
+   const cl = COLL.has(g.id) && !PRINTING, chev = COLLAPSE ? `<span class="chev">${cl ? "▸" : "▾"}</span>` : "";
    const pr = rs.filter(r => r.price), allOn = pr.length && pr.every(r => !OFF.has(KEY(r)));
    const gtk = TICKS && pr.length ? `<input type="checkbox" class="tk tkg" data-g="${g.id}"${allOn ? " checked" : ""} aria-label="Include all ${esc(g.name)}">` : "";
-   html += `<tr class="grp${TICKS ? " gh" : ""}${TICKS && pr.length && pr.every(r => OFF.has(KEY(r))) ? " off" : ""}" data-g="${g.id}"><td colspan="2">${gtk}${chev}${esc(g.name)}${TICKS ? `<span class="gn">${rs.length} item${rs.length > 1 ? "s" : ""}</span>` : ""}</td><td class="r">${gs ? $(gs) : ""}</td></tr>`;
+   html += `<tr class="grp${COLLAPSE ? " gh" : ""}${TICKS && pr.length && pr.every(r => OFF.has(KEY(r))) ? " off" : ""}" data-g="${g.id}"><td colspan="2">${gtk}${chev}${esc(g.name)}${COLLAPSE ? `<span class="gn">${rs.length} item${rs.length > 1 ? "s" : ""}</span>` : ""}</td><td class="r">${gs ? $(gs) : ""}</td></tr>`;
    if(!cl) rs.forEach(r => { html += rowHtml(r, false); }); });
  } else {
-  const rs = R.slice().sort(mode === "dollar" ? (a, b) => (b.price || 0) - (a.price || 0) || refKey(a).localeCompare(refKey(b)) : (a, b) => refKey(a).localeCompare(refKey(b)));
+  const rank = r => (r.tags || []).includes("appr") ? 0 : (r.tags || []).includes("hs") ? 1 : 2;
+  const rs = R.slice().sort(mode === "dollar" ? (a, b) => (b.price || 0) - (a.price || 0) || refKey(a).localeCompare(refKey(b))
+   : mode === "priority" ? (a, b) => rank(a) - rank(b) || (b.price || 0) - (a.price || 0) || refKey(a).localeCompare(refKey(b))
+   : (a, b) => refKey(a).localeCompare(refKey(b)));
   rs.forEach(r => { html += rowHtml(r, true); });
  }
  document.getElementById("rows").innerHTML = html;
@@ -198,7 +201,7 @@ function renderRows(mode){
 }
 renderRows("trade");
 document.querySelectorAll(".sortbar button[data-s]").forEach(b => b.addEventListener("click", () => renderRows(b.dataset.s)));
-if(TICKS){
+if(COLLAPSE){
  const sb = document.querySelector(".sortbar"); if(sb){ sb.insertAdjacentHTML("beforeend", '<span class="sep"></span><button data-x="open">Expand all</button><button data-x="close">Collapse all</button>');
   sb.querySelectorAll("button[data-x]").forEach(b => b.addEventListener("click", () => { if(b.dataset.x === "open") COLL.clear(); else { COLL = new Set(G.map(g => g.id)); DET.clear(); } renderRows(MODE); })); }
  document.getElementById("rows").addEventListener("click", e => { const d = e.target.closest(".dt"); if(d){ const k = d.dataset.d; DET.has(k) ? DET.delete(k) : DET.add(k); renderRows(MODE); return; }
@@ -231,7 +234,7 @@ function paintTotals(){ sums(); const reA = RE.filter(r => !OFF.has(KEY(r))).len
  set("tpriced", $(sumI), true); set("tlic", $(sumL), sumL > 0); set("tperm", $(sumP), sumP > 0); set("tel", reA + " items · " + $(sumE), reA > 0);
  set("toff", OFF.size + " · -" + $(sumOff), OFF.size > 0); set("ttotal", $(sumI + sumL + sumP + sumE), true); }
 paintTotals();
-if(TICKS){   // G 10/4: the quote details block folds to one line on team and master pages
+if(TICKS && COLLAPSE){   // G 10/4: the quote details block folds to one line on team and master pages
  const fx = document.querySelector(".facts");
  if(fx){ const val = lab => { const d = [...fx.querySelectorAll("div")].find(x => (x.querySelector("span") || {}).textContent === lab); return d ? d.querySelector("b").textContent : ""; };
   const sum = [val("OPTION").replace(/^Option [ABC][12]: /, ""), "valid through " + val("VALID THROUGH")].filter(Boolean).join(" · ");
@@ -247,7 +250,7 @@ if(TICKS){   // G 10/4: the quote details block folds to one line on team and ma
   const total = sumI + sumL + sumP + sumE, off = [...OFF];
   try{ localStorage.setItem(SKEY, JSON.stringify({off, total})); }catch(_){ }
   try{ fetch(SBU, {method: "POST", keepalive: true, headers: {"apikey": SBK, "Authorization": "Bearer " + SBK, "Content-Type": "application/json", "Prefer": "return=minimal"},
-   body: JSON.stringify({page: "q169", who: "team", action: el.checked ? "line_on" : "line_off", detail: location.pathname + " " + k,
+   body: JSON.stringify({page: "q169", who: WHO, action: el.checked ? "line_on" : "line_off", detail: location.pathname + " " + k,
    snapshot: JSON.stringify({path: location.pathname, off, total}), ua: navigator.userAgent.slice(0, 200)})}).catch(() => {}); }catch(_){ } });
 }
 </script></body></html>
