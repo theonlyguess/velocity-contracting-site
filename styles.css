@@ -252,6 +252,18 @@ ul, ol { margin: 0; padding: 0; }
   text-align: center;
 }
 
+.site-nav a.nav-cta {
+  color: var(--white);
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+}
+.site-nav a.nav-cta:hover,
+.site-nav a.nav-cta:focus-visible {
+  color: var(--white);
+  background: var(--navy-950);
+  border-color: var(--navy-950);
+}
+
 /* --- Buttons --- */
 .btn {
   display: inline-flex;
