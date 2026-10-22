@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; form-action 'self'; base-uri 'self'; object-src 'none'" /><meta name="referrer" content="strict-origin-when-cross-origin" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Repair Quote 1811 Quebec</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
@@ -208,7 +208,6 @@ if(TICKS){   // ticks and their change log run on every page; the quote details 
   fx.insertAdjacentHTML("beforebegin", `<button class="fx" aria-expanded="false"><span class="fxk">Quote details</span><span class="fxs">${esc(sum)}</span><span class="chev">▸</span></button>`);
   fx.classList.add("fold"); const b = fx.previousElementSibling;
   b.addEventListener("click", () => { const open = fx.classList.toggle("fold") === false; b.setAttribute("aria-expanded", open); b.querySelector(".chev").textContent = open ? "▾" : "▸"; }); }
- const SBU = "https://onqrpoynxfnhadjnedwb.supabase.co/rest/v1/quote_page_events", SBK = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucXJwb3lueGZuaGFkam5lZHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NzI4MTUsImV4cCI6MjEwMjM0ODgxNX0.yFRYC-fbDdMyT5TAq9_lw_uywWncVtq6Fz_y8dNbprU";
  document.getElementById("rows").addEventListener("change", e => { const el = e.target; if(!el.classList || !el.classList.contains("tk")) return;
   let k = el.dataset.k;
   if(el.classList.contains("tkg")){ const by = el.dataset.by || "group"; k = by + ":" + el.dataset.g; R.filter(r => r[by] === el.dataset.g && r.price).forEach(r => { if(el.checked) OFF.delete(KEY(r)); else OFF.add(KEY(r)); }); }
@@ -216,8 +215,6 @@ if(TICKS){   // ticks and their change log run on every page; the quote details 
   renderRows(MODE); paintTotals();
   const total = sumI + sumL + sumP + sumE, off = [...OFF];
   try{ localStorage.setItem(SKEY, JSON.stringify({off, total})); }catch(_){ }
-  try{ fetch(SBU, {method: "POST", keepalive: true, headers: {"apikey": SBK, "Authorization": "Bearer " + SBK, "Content-Type": "application/json", "Prefer": "return=minimal"},
-   body: JSON.stringify({page: "q169", who: WHO, action: el.checked ? "line_on" : "line_off", detail: location.pathname + " " + k,
-   snapshot: JSON.stringify({path: location.pathname, off, total}), ua: navigator.userAgent.slice(0, 200)})}).catch(() => {}); }catch(_){ } });
+  });
 }
 </script></body></html>
